@@ -19,12 +19,20 @@ section {
     text-align: center;
 }
 
+.player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10vh;
+}
+
 .game-board {
     background-color:rgb(200, 217, 233);
     width: 50vw; 
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .container {
@@ -35,8 +43,18 @@ section {
     width: 40vw;
     grid-gap: 10px;
     background-color: rgb(235, 95, 118);
+    margin-top: 8vh;
 }
 
 .square {
     background-color:rgb(200, 217, 233);
+}
+
+h2 {
+    margin-bottom: 1vh;
+    font-size: 10vh;
+}
+
+h3 {
+    margin-top: 0px;
 }
