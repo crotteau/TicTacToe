@@ -1,0 +1,42 @@
+* {
+    font-family: 'Tektur', sans-serif;
+    font-size: 4vh;
+}
+
+body {
+    background-color: rgb(200, 217, 233);
+    margin: 0;
+}
+
+main {
+    display:flex;
+}
+
+section {
+    background-color: rgb(173, 201, 228);
+    height: 100vh;
+    width: 25vw; 
+    text-align: center;
+}
+
+.game-board {
+    background-color:rgb(200, 217, 233);
+    width: 50vw; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    height: 50vh; 
+    width: 40vw;
+    grid-gap: 10px;
+    background-color: rgb(235, 95, 118);
+}
+
+.square {
+    background-color:rgb(200, 217, 233);
+}
