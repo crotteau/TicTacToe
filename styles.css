@@ -1,6 +1,6 @@
 * {
     font-family: 'Tektur', sans-serif;
-    font-size: 4vh;
+    font-size: 3vh;
 }
 
 body {
@@ -50,11 +50,20 @@ section {
     background-color:rgb(200, 217, 233);
 }
 
+.square:hover {
+    background-color:rgb(145, 195, 242);
+}
+
 h2 {
     margin-bottom: 1vh;
     font-size: 10vh;
 }
 
 h3 {
+    margin-top: 0px;
+}
+
+.turn {
+    font-size: 4vh;
     margin-top: 0px;
 }
