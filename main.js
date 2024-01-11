@@ -10,7 +10,8 @@ function createPlayer(id, token) {
         wins: 0,
         isWinner: false,
         ticTacs: [],
-        isTurn: false
+        isTurn: false,
+        combos: [0, 0, 0, 0, 0, 0, 0, 0]
     }
     if (player.id === 'one') {
         player.isTurn = true
@@ -24,6 +25,7 @@ createPlayer('one', '🦐');
 createPlayer('two', '🦩');
 
 function increaseWins(player) {
+    player.isWinner = true
     player.wins += 1
     return player
 }
@@ -41,15 +43,16 @@ var winningCombos = [
 
 function trackGame(player) {
     for (var i = 0; i < winningCombos.length; i++) {
-        for (var x = 0; x < winningCombos[i].length; x++)
+        player.combos[i] = 0
+    for (var x = 0; x < winningCombos[i].length; x++) {
         if (player.ticTacs.includes(winningCombos[i][x])) {
-            player.isWinner = true
-            console.log('check check check')
-       } 
-    } if (player.isWinner) {
-        player.wins += 1
-        return 'youve won!'
+            player.combos[i] += 1
+                if (player.combos[i] === 3) {
+                    increaseWins(player)
+                    } 
+        }
     }
+    } 
 }
 
 // sort into ascending order and repeatedly check if tics array contains a winning combo
