@@ -35,11 +35,11 @@ section {
     justify-content: center;
 }
 
-.container {
+.game-board-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    height: 50vh; 
+    height: 65vh; 
     width: 40vw;
     grid-gap: 10px;
     background-color: rgb(235, 95, 118);
@@ -48,6 +48,10 @@ section {
 
 .square {
     background-color:rgb(200, 217, 233);
+    font-size: 7vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .square:hover {
@@ -63,7 +67,11 @@ h3 {
     margin-top: 0px;
 }
 
-.turn {
+.game-board-turn {
     font-size: 4vh;
     margin-top: 0px;
+}
+
+.hidden {
+    display: none;
 }
