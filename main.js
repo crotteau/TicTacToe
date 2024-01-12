@@ -44,28 +44,26 @@ var winningCombos = [
 function trackGame(player) {
     for (var i = 0; i < winningCombos.length; i++) {
         player.combos[i] = 0
-    for (var x = 0; x < winningCombos[i].length; x++) {
-        if (player.ticTacs.includes(winningCombos[i][x])) {
-            player.combos[i] += 1
-                if (player.combos[i] === 3) {
+        for (var x = 0; x < winningCombos[i].length; x++) {
+            if (player.ticTacs.includes(winningCombos[i][x])) {
+                player.combos[i] += 1
+            } if (player.combos[i] === 3) {
                     increaseWins(player)
-                    showGameResult(player)  
-                    console.log('finally a winner')  
-                    return 'finally a winner'  
-                } 
+                    showWinner(player)   
+            } else if (playerOne.ticTacs.length + playerTwo.ticTacs.length === 9) {
+                    console.log('check for draw')
+                    checkForDraw(player);
                 }              
         }
     }
     }
 
-function checkForDraw() {
-    if (playerOne.ticTacs.length + playerTwo.ticTacs.length === 9) {
-        if (!playerOne.isWinner && !playerTwo.isWinner) {
-            // return turn.innerText = 'This game is a draw!'
-            console.log('this game is a draw')
-        }
+function checkForDraw(player) {
+    if (!playerOne.isWinner && !playerTwo.isWinner) {
+            showWinner(player);
     }
 }
+
 
 // UPDATING THE GAME BOARD (DOM)
 var playerOneScore = document.querySelector('#team-one')
@@ -87,6 +85,8 @@ gameBoard.addEventListener('click', function(e) {
     if (e.target.classList.contains('square')) {
         addMove(e)
         updateTurn()
+        // console.log(e.target)
+        // disableSquare(e.target)
     }
 })
 
@@ -103,7 +103,6 @@ function updateTurn() {
 }
 
 function addMove(e) {
-    console.log('e.target.id!!!!', e.target)
    if(playerOne.isTurn) {
     playerOne.ticTacs.push(parseInt(e.target.id))
     e.target.innerText = '🦐'
@@ -113,18 +112,26 @@ function addMove(e) {
    }
    trackGame(playerOne);
    trackGame(playerTwo);
-   checkForDraw();
 }
 
-function showGameResult(player) {
+function showWinner(player) {
+    turn.classList.add('hidden')
+    gameResult.classList.remove('hidden')
     if (player.isWinner) {
         trackScore(player)
-        gameResult.innerText = `Congrats ${player.token}! You Win!`
-        gameResult.classList.toggle('hidden')
-        turn.toggleAttribute('hidden')
-        console.log('it worked down here too!')
+        gameResult.innerText = `Congrats! ${player.token} wins!`
+    } else { 
+        gameResult.innerText = `This game is a draw!`
     }
 }
+
+// function disableSquare(id) {
+//     id.disabled
+// }
+
+// function stopGameFunctions() {
+    
+// }
 
 // needs to update screen when there's a draw too
 
