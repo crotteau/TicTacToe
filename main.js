@@ -41,14 +41,16 @@ function trackGame(player, target) {
     for (var i = 0; i < winningCombos.length; i++) {
        if (winningCombos[i].includes(target)) {
             player.combos[i] += 1
-            checkForWinner(player)
-       }      
-    } return player
+        }      
+    } 
+    checkForWinner(player)
+    return player
 }
 
 function checkForWinner(player) {
     for (var i = 0; i < player.combos.length; i++) {
         if (player.combos[i] === 3) {
+            console.log('!! increasing wins', player.id)
             increaseWins(player)
             showWinner(player)   
         } else if (playerOne.ticTacs.length + playerTwo.ticTacs.length === 9) {
@@ -102,18 +104,18 @@ function checkIsUnique(target) {
 function addMove(target) {
     if (playerOne.isTurn) {
         playerOne.ticTacs.push(target)
-        displayTicTacs(playerOne)
+        displayTicTacs(playerOne, playerOne.token)
         trackGame(playerOne, target)
     } else {
         playerTwo.ticTacs.push(target)
-        displayTicTacs(playerTwo)
+        displayTicTacs(playerTwo, playerTwo.token)
         trackGame(playerTwo, target)
     } updateTurn()
 }
 
-function displayTicTacs(player) {
+function displayTicTacs(player, ticTac) {
     for (var i = 0; i < player.ticTacs.length; i++) {
-        document.getElementById(player.ticTacs[i]).innerText = player.token
+        document.getElementById(player.ticTacs[i]).innerText = ticTac
     }
 }
 
@@ -129,7 +131,6 @@ function updateTurn() {
     }
 }
 
-
 function showWinner(player) {
     turn.classList.add('hidden')
     gameResult.classList.remove('hidden')
@@ -139,12 +140,18 @@ function showWinner(player) {
         } else { 
             gameResult.innerText = `This game is a draw!`
         }
+    setTimeout(function () {
+        resetBoard(playerOne)
+        resetBoard(playerTwo);
+        }, 4.0 * 1000)
 }
 
 function resetBoard(player) {
     turn.classList.remove('hidden')
     gameResult.classList.add('hidden')
+    displayTicTacs(player, '')
     player.ticTacs = []
+    player.combos = [0, 0, 0, 0, 0, 0, 0, 0]
         if (player.isWinner) {
             player.isTurn = false
         } else {
@@ -152,5 +159,6 @@ function resetBoard(player) {
             turn.innerText = `It's ${player.token}'s turn!`
         }
 }
+
 
 // check for srp - resetBoard and showWinner
