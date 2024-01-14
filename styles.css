@@ -10,23 +10,35 @@ body {
 
 main {
     display:flex;
+    justify-content: space-evenly;
+    /* align-items: center; */
 }
 
+h1 {
+    font-size: 3vw;
+    margin-top: 0px;
+}
 section {
     background-color: rgb(173, 201, 228);
     height: 100vh;
     width: 25vw; 
     text-align: center;
+    border-radius: 25px;
 }
 
 .player {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    padding-top: 10vh;
+    margin-top: 20vh;
+    height: 25vh;
+    width: 20vw;
+    z-index: 2;
 }
 
 .game-board {
+    z-index: 2;
     background-color:rgb(200, 217, 233);
     width: 50vw; 
     display: flex;
@@ -56,26 +68,65 @@ section {
 
 .square:hover {
     background-color:rgb(145, 195, 242);
+    cursor: pointer;
 }
 
 h2 {
-    margin-bottom: 1vh;
+    margin: 0px;
     font-size: 10vh;
+    z-index: 2;
 }
 
 h3 {
     margin-top: 0px;
+    z-index: 2;
 }
 
-.game-board-turn {
+.game-board-turn, .game-board-result {
     font-size: 4vh;
     margin-top: 0px;
+    z-index: 2;
 }
 
 .hidden {
     display: none;
 }
 
-.game-board-container:disabled {
-    cursor: not-allowed;
+.main-overlay {
+    opacity: 0.75;
+    z-index: 1;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+   }
+
+.flamingo {
+    max-width: 35vw;
+    margin-top: 1rem;
+    border-radius: 15px;
 }
+
+.shrimp {
+    margin-top: 3rem;
+}
+
+/* .main-shrimp {
+    z-index: 2;
+    animation: fly 5s linear infinite;
+    top: 0;
+    left: 0;
+    position: fixed;
+    pointer-events: none;
+    } */
+    /* @keyframes fly {
+        0%{
+            transform: translate(0,110vh);opacity: .50;
+        }
+        50%{
+            transform: translate(110vw,0);opacity: 1;
+        }
+        100%{
+            transform: translate(0,110vh);opacity: .50;
+        }
+    }
+} */

@@ -67,6 +67,7 @@ function increaseWins(player) {
 
 function checkForDraw(player) {
     if (!playerOne.isWinner && !playerTwo.isWinner) {
+        console.log('are you getting here???', player.id)
         showWinner(player);
     }
 }
@@ -79,6 +80,8 @@ var gameBoard = document.querySelector('.game-board-container')
 var turn = document.querySelector('.game-board-turn')
 var square = document.querySelectorAll('.square')
 var gameResult = document.querySelector('.game-board-result')
+var flamingoWins = document.querySelector('#flamingo-wins')
+var shrimpWins = document.querySelector('#shrimp-wins')
 
 function updateScore(player) {
     if (player.id === 'one') {
@@ -131,34 +134,45 @@ function updateTurn() {
     }
 }
 
+function toggleDisplays(force1, force2) {
+    turn.classList.toggle('hidden', force1)
+    gameResult.classList.toggle('hidden', force2)
+    gameBoard.classList.toggle('hidden', force1 )
+    shrimpWins.classList.toggle('hidden', !playerOne.isWinner)
+    flamingoWins.classList.toggle('hidden', !playerTwo.isWinner)
+}   
+
 function showWinner(player) {
-    turn.classList.add('hidden')
-    gameResult.classList.remove('hidden')
-        if (player.isWinner) {
-            updateScore(player)
-            gameResult.innerText = `Congrats! ${player.token} wins!`
-        } else { 
-            gameResult.innerText = `This game is a draw!`
-        }
+    if (player.isWinner) {
+        updateScore(player)
+        gameResult.innerText = `Congrats! ${player.token} wins!`
+    } else { 
+        console.log('how about here?????', player.id)
+        gameResult.innerText = `This game is a draw!`
+    }
+    toggleDisplays(true, false);
     setTimeout(function () {
         resetBoard(playerOne)
-        resetBoard(playerTwo);
+        resetBoard(playerTwo)
+        toggleDisplays(false, true)
         }, 4.0 * 1000)
 }
 
 function resetBoard(player) {
-    turn.classList.remove('hidden')
-    gameResult.classList.add('hidden')
     displayTicTacs(player, '')
     player.ticTacs = []
     player.combos = [0, 0, 0, 0, 0, 0, 0, 0]
-        if (player.isWinner) {
-            player.isTurn = false
-        } else {
-            player.isTurn = true
-            turn.innerText = `It's ${player.token}'s turn!`
-        }
+    resetTurn(player)
 }
 
+function resetTurn(player) {
+    if (player.isWinner) {
+        player.isTurn = false
+        player.isWinner = false
+    } else {
+        player.isTurn = true
+        turn.innerText = `It's ${player.token}'s turn!`
+    }  
+}
 
 // check for srp - resetBoard and showWinner
