@@ -24,6 +24,7 @@ section {
     width: 25vw; 
     text-align: center;
     border-radius: 25px;
+    z-index: 3;
 }
 
 .player {
@@ -74,18 +75,16 @@ section {
 h2 {
     margin: 0px;
     font-size: 10vh;
-    z-index: 2;
 }
 
 h3 {
     margin-top: 0px;
-    z-index: 2;
 }
 
 .game-board-turn, .game-board-result {
     font-size: 4vh;
     margin-top: 0px;
-    z-index: 2;
+    z-index: 3;
 }
 
 .hidden {
@@ -110,23 +109,28 @@ h3 {
     margin-top: 3rem;
 }
 
-/* .main-shrimp {
+.main-shrimp {
     z-index: 2;
-    animation: fly 5s linear infinite;
+    animation: swim 35s infinite;
     top: 0;
     left: 0;
     position: fixed;
     pointer-events: none;
-    } */
-    /* @keyframes fly {
+    }
+    @keyframes swim {
         0%{
-            transform: translate(0,110vh);opacity: .50;
+            transform: translate(110vw,0vh);
+        }
+        25%{
+            transform: translate(70vw,30vh);
         }
         50%{
-            transform: translate(110vw,0);opacity: 1;
+            transform: translate(65vw,-20vh);
+        }
+        75%{
+            transform: translate(0vw,30vh);
         }
         100%{
-            transform: translate(0,110vh);opacity: .50;
+            transform: translate(-110vw,90vh);
         }
     }
-} */
