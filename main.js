@@ -1,6 +1,7 @@
 // PLAYERS
 var playerOne;
 var playerTwo;
+var isDraw;
 
 var winningCombos = [
     [1,2,3],
@@ -19,6 +20,7 @@ function createPlayer(id, token) {
         wins: 0,
         isWinner: false,
         isTurn: false,
+        isFirst: false,
         ticTacs: [],
         combos: [0, 0, 0, 0, 0, 0, 0, 0]
     }
@@ -31,6 +33,7 @@ createPlayer('two', '🦩');
 function setUpGame(player) {
     if (player.id === 'one') {
         player.isTurn = true
+        player.isFirst = true
         return playerOne = player
     } else {
         return playerTwo = player
@@ -50,13 +53,12 @@ function trackGame(player, target) {
 function checkForWinner(player) {
     for (var i = 0; i < player.combos.length; i++) {
         if (player.combos[i] === 3) {
-            console.log('!! increasing wins', player.id)
             increaseWins(player)
             showWinner(player)   
-        } else if (playerOne.ticTacs.length + playerTwo.ticTacs.length === 9) {
-            checkForDraw(player);
-        }    
-    }          
+        }          
+    } if (playerOne.ticTacs.length + playerTwo.ticTacs.length === 9) {
+        checkForDraw(player);
+    }    
 }
     
 function increaseWins(player) {
@@ -66,10 +68,11 @@ function increaseWins(player) {
 }
 
 function checkForDraw(player) {
-    if (!playerOne.isWinner && !playerTwo.isWinner) {
-        console.log('are you getting here???', player.id)
-        showWinner(player);
-    }
+    isDraw = false
+        if (!playerOne.isWinner && !playerTwo.isWinner) {
+            isDraw = true
+            showWinner(player);
+        }
 }
 
 
@@ -123,7 +126,7 @@ function displayTicTacs(player, ticTac) {
 }
 
 function updateTurn() {
-    if (turn.innerText.includes(playerOne.token)) {
+    if (playerOne.isTurn) {
         turn.innerText = `It's ${playerTwo.token}'s turn!`
         playerOne.isTurn = false
         playerTwo.isTurn = true
@@ -147,32 +150,51 @@ function showWinner(player) {
         updateScore(player)
         gameResult.innerText = `Congrats! ${player.token} wins!`
     } else { 
-        console.log('how about here?????', player.id)
         gameResult.innerText = `This game is a draw!`
     }
-    toggleDisplays(true, false);
+    toggleDisplays(true, false)
+    pauseGame()
+}
+
+function pauseGame() {
     setTimeout(function () {
         resetBoard(playerOne)
         resetBoard(playerTwo)
         toggleDisplays(false, true)
-        }, 4.0 * 1000)
+    }, 4000) 
 }
 
+
 function resetBoard(player) {
+    player.isTurn = false
+    resetTurn(player)
     displayTicTacs(player, '')
     player.ticTacs = []
     player.combos = [0, 0, 0, 0, 0, 0, 0, 0]
-    resetTurn(player)
 }
 
 function resetTurn(player) {
     if (player.isWinner) {
-        player.isTurn = false
+        player.isFirst = false
         player.isWinner = false
+    } else if (isDraw) {
+        chooseTurnAFterDraw(player);
     } else {
         player.isTurn = true
+        player.isFirst = true
         turn.innerText = `It's ${player.token}'s turn!`
-    }  
+    }
 }
 
-// check for srp - resetBoard and showWinner
+function chooseTurnAFterDraw(player) {
+    if (player.isFirst) {
+        player.isFirst = false
+    } else {
+        player.isFirst = true
+        player.isTurn = true
+        turn.innerText = `It's ${player.token}'s turn!`
+    }
+}
+
+
+
