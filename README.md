@@ -11,7 +11,7 @@ To use this app:
 3. go into the newly cloned down folder and open the index.html file
 
 ### Preview of App:
-!(./assets/ticTacExample.gif)
+![App Preview](./assets/ticTacExample.gif)
 
 ### Context:
 Over the course of a week, I spent around 15-20hrs creating this application. It's the final project for Mod 1 and I enjoyed having more freedom with my CSS styling.
