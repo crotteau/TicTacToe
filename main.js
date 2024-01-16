@@ -3,15 +3,6 @@ var playerOne;
 var playerTwo;
 var isDraw;
 
-var winningCombos = [
-    [1,2,3],
-    [4,5,6],
-    [7,8,9],
-    [1,4,7],
-    [2,5,8],
-    [3,6,9],
-    [1,5,9],
-    [3,5,7]]
 
 function createPlayer(id, token) {
     var player =  {
@@ -39,7 +30,17 @@ function setUpGame(player) {
         return playerTwo = player
     }   
 }
-    
+
+var winningCombos = [
+    [1,2,3],
+    [4,5,6],
+    [7,8,9],
+    [1,4,7],
+    [2,5,8],
+    [3,6,9],
+    [1,5,9],
+    [3,5,7]]
+
 function trackGame(player, target) {
     for (var i = 0; i < winningCombos.length; i++) {
        if (winningCombos[i].includes(target)) {
@@ -73,6 +74,7 @@ function checkForDraw(player) {
             isDraw = true
             showWinner(player);
         }
+        console.log('isDraw', isDraw)
 }
 
 
@@ -163,7 +165,6 @@ function pauseGame() {
         toggleDisplays(false, true)
     }, 4000) 
 }
-
 
 function resetBoard(player) {
     player.isTurn = false
